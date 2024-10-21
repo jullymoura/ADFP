@@ -1,0 +1,281 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\begin{document}
+
+ % Capa
+    \begin{titlepage}
+      \centering
+      \vspace*{1cm}
+    
+     \Huge
+     \textbf{Atividade 2 - Introdução à análise de dados de Física de Partículas}
+
+     \vspace{0.5cm}
+    
+     \Large 
+      Jully Moura Alves
+
+     \vfill
+    
+     \Large
+      Outubro de 2024
+    \end{titlepage}
+
+ %Pagina 1
+    \raggedright{
+      \section*{Exercício 1}
+      \vspace*{1cm}
+
+ 
+      \textbf{A equação de ajuste linear é dada por:}
+      \vspace{0.5cm}
+
+       %Eq Ajuste linear 
+           {\Large 
+              \[ y = mx + b\]
+              
+              \vspace{0.5cm}
+              
+              \[\Delta y = \frac {\sqrt {\sum_{i=1}^N (m x_i + b - y_i)^2}}{N-2} \]
+
+              \vspace{0.5cm}
+              
+              \[ y \pm \Delta y = (m \pm \Delta m) x + (b \pm \Delta b) \]
+           }
+  
+       \vspace{0.5cm}
+
+       %Eq m
+           \textbf{m:}
+           \vspace{0.5cm}
+  
+           {\Large
+              \[ m = \frac{\sum_{i=1}^{N} x_i y_i -({\sum_{i=1}^{N} x_i \sum_{i=1}^{N} y_i})\frac{1}{N}}{ \sum_{i=1}^{N} x_i^2 - \frac{1}{N}{\left( \sum_{i=1}^{N} x_i \right)^2}}\]
+              
+            \vspace{0.5cm}
+  
+              \[\Delta m = \frac{\Delta y}{\sqrt{ (x_i - \frac{ \sum_{i=1}^N x_i}{N})^2}}\]
+            }
+  
+        \vspace{0.5cm}
+  
+        %Eq b
+            \textbf{b:}
+            \vspace{0.2cm}
+  
+            {\Large
+               \[ b = \frac{1}{N}({\sum_{i=1}^{N} y_i - m \sum_{i=1}^{N} x_i)}\] 
+             
+             \vspace{0.2 cm}
+          
+               \[\Delta b = \sqrt{\frac{\sum_{i=1}^Nx_i^2}{N \sum_{i=1}^N (x_i - \frac{\sum_{i=1}^N x_i}{N})^2}} \Delta y\]
+
+                             
+            }
+%Página 2
+    \newpage
+       {\section*{Exercício 2}}
+       {\Large 
+          {\sigma: }\\
+          {\[ \sigma = \frac{N_{total} - N_{background}}{L}\]
+          
+           \vspace{0.2cm}
+           
+           \[ \sigma = \frac {2467 - 1223.5}{25} = 53.74 (fb) \]
+
+           \vspace{1cm}
+
+           \textbf{N:}
+           \[ N = N_{total} - N_{background} \]
+           \vspace{0.2 cm}
+           \[ N = 2467 - 1223.5 = 1343.5\]
+
+           \vspace{1cm}
+           
+           \textbf{Incertezas estatísticas}
+
+           \vspace{1cm}
+
+           \textbf{\Delta N:}\\
+           \[ \Delta N = \sqrt{N} \]
+           \vspace{0.2 cm}
+           \[ \Delta N = \sqrt{1343.5} = 36.65 \]
+           
+           \vspace{1cm}
+           
+           \textbf{\Delta \sigma_1:}\\   
+           \[ \Delta \sigma_1 = \frac{ \Delta N}{L}\]
+           \vspace{0.2 cm}
+           \[ \Delta \sigma_1 = \frac{36,65}{25} = 1.47 (fb)\]
+       
+           \vspace{1cm}
+
+           \textbf{Incertezas sistemáticas}
+
+           \vspace{1cm}
+           
+           \textbf{\Delta L:}\\
+           \[ \Delta L = 0.1 \times 25 = 2.5(fb^{-1})\]
+
+            \vspace{1cm}
+
+           \textbf{\Delta \sigma_2:}\\
+           \[ \Delta \sigma_2 = \sigma \times \frac{ \Delta L }{L}\]
+           \vspace{0.2 cm}           
+           \[ \Delta \sigma_2 = 53.74 \times \frac{2.5}{25} = 5.37 (fb) \]
+           
+           \vspace{1cm}
+
+           \textbf{Incerteza total}
+
+           \vspace{1cm}
+
+           \[\Delta \sigma = \sqrt{(\sigma_1)^2 + (\sigma_2)^2}\]
+           \vspace{0.2 cm} 
+           \[\Delta \sigma = \sqrt{(1.47)^2 + (5.37)^2} = 5.57(fb) \]
+
+           \vspace{1cm}
+
+           \textbf{Resultado}
+
+           \vspace{1cm}
+
+           \[ \sigma = (53.74 \pm 5.57)fb\]         
+          }
+       }  
+
+ %Exercício 3   
+    \newpage
+      \section*{Exercício 3}
+
+      \vspace{0.5cm}
+      
+      Através de Poisson
+
+      \vspace{0.5cm}
+      
+     {\Large 
+        \[P( k; \lambda) = \frac{\lambda^k e^{- \lambda} }{k!} \]
+        
+      \vspace{0.5cm}
+
+        Para k = 0:
+
+      \vspace{0.5cm}
+         
+       \[P( 0; \lambda) =  e^{- \lambda} \] 
+
+      \vspace{0.5cm}
+
+        Para intervalo de confiança de 95\% :
+
+      \vspace{0.5cm}
+
+        \[e^{- \lambda} \ge 1 - 0.95\]
+        \vspace{0.2cm}
+        \[e^{- \lambda} \ge 0.05}\]
+        \vspace{0.2cm}
+        \[ - \lambda \ge ln(0.05)\]
+        \vspace{0.2cm}
+        \[ \lambda \le - ln(0.05)\] 
+        \vspace{0.2cm}
+        \[ - ln(0.05) \approx 2.996\]
+
+
+        Resultado:
+
+      \vspace{0.5cm}
+         
+        \[ \lambda \ge 2.996 \]
+      }
+
+%Exercício 4
+    \newpage
+
+    \section*{Exercício 4}
+
+    {\Large 
+       \[ X^2 = \sum_{i=1}^N \frac {(y_i  - f(x_i))²}{ {\sigma_i}^2 } \]
+
+       \vspace{0.5cm}
+
+       Graus de liberdade:
+
+       \vspace{0.5cm}
+
+       \[ndf = N - p\]
+
+       \vspace{0.5cm}
+
+       Média de X²:
+
+       \vspace{0.5cm}
+       
+       \[Med|X^2| = ndf\]
+
+       \vspace{0.5cm}
+
+       Variância de X²:
+
+       \vspace{0.5cm}
+
+       \[Var(X²) = 2ndf\]
+
+       \vspace{0.5cm}
+
+       Ajuste:
+
+       \vspace{0.5cm}
+
+       \[Mdf \left[ \frac{X^2}{ndf} \right] = \frac{Med|X^2|}{ndf}\]
+
+       \vspace{0.5cm}
+
+       \[\frac{Med|X^2|}{ndf} = \frac{ndf}{ndf}=1\]
+
+       \vspace{9cm}
+
+       Resposta:
+
+       \vspace{1cm}
+
+       Quando \[ \frac{X^2}{ndf} = 1\]
+
+       \vspace{1cm}
+       
+       a discrepância entre os dados observados e os valores ajustados é consistente com a incerteza dos dados.
+
+       \vspace{1cm}
+
+        Quando \[ \frac{X^2}{ndf} `< 1\] 
+        
+        \vspace{1cm}
+        
+        a discrepância entre os dados e o modelo é menor do que o esperado, indicando que os erros podem estar superestimados ou o modelo é mais complexo do que os dados exigem.
+
+        \vspace{1cm}
+
+        Quando \[ \frac{X^2}{ndf} `< 1\] 
+        
+        \vspace{1cm}
+        
+        a discrepância é maior do que a incerteza permite, indicando que o modelo pode não estar adequado ou os erros subestimados.
+
+        \vspace{2cm}
+
+        Por esses motivos, a melhor função que se adequada aos dados é quando\vspace{1cm}
+        
+        \vspace{0.5cm}
+        
+        \[ \frac{X^2}{ndf} = 1\]
+
+        
+    }
+    
+  
+
+
+
+\end{document}
+
