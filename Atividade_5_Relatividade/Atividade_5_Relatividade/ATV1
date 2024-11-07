@@ -1,0 +1,113 @@
+#include <TFile.h>
+#include <TTree.h>
+#include <TH1F.h>
+#include <TCanvas.h>
+#include <TMath.h>
+
+void atv1() {
+    // Abrindo o dataset do grupo 4
+    TFile *file = TFile::Open("76A312CE-F9C3-5F4D-9093-F26D7C50BF61.root");
+    TTree *tree = (TTree*)file->Get("Events");
+
+    // Declarando variáveis
+    float pt1, pt2, pt3, pt4, eta1, eta2, eta3, eta4, phi1, phi2, phi3, phi4;
+
+    // Ligando as variáveis à tree
+    tree->SetBranchAddress("Tau_pt", &pt1);
+    tree->SetBranchAddress("Muon_pt", &pt2);
+    tree->SetBranchAddress("Electron_pt", &pt3);
+    tree->SetBranchAddress("Jets_pt", &pt4);
+    tree->SetBranchAddress("Tau_eta", &eta1);
+    tree->SetBranchAddress("Muon_eta", &eta2);
+    tree->SetBranchAddress("Electron_eta", &eta3);
+    tree->SetBranchAddress("Jets_eta", &eta4);
+    tree->SetBranchAddress("Tau_phi", &phi1);
+    tree->SetBranchAddress("Muon_phi", &phi2);
+    tree->SetBranchAddress("Electron_phi", &phi3);
+    tree->SetBranchAddress("Jets_phi", &phi4);
+
+    
+    //Criando histogramas dos leptons
+    TH1F *h_pt = new TH1F("Leptons_pt", "Distribuicao de pt dos leptons", 50, 0, 100);
+    h_pt->GetXaxis()->SetTitle("p_{T} (GeV/c)");
+    h_pt->GetYaxis()->SetTitle("Events");    
+    TH1F *h_eta = new TH1F("Leptons_eta", "Distribuicao de #eta dos leptons", 50, -3, 3);
+    h_eta->GetXaxis()->SetTitle("#eta");
+    h_eta->GetYaxis()->SetTitle("Events");
+    TH1F *h_phi = new TH1F("Leptons_phi", "Distribuicao de #phi dos leptons", 50, -TMath::Pi(), TMath::Pi());
+    h_phi->GetXaxis()->SetTitle("#phi");
+    h_phi->GetYaxis()->SetTitle("Events");
+
+    //Criando histograma dos jatos  
+    TH1F *h_jet1= new TH1F("Jato_pt", "Distribuicao de pt dos jatos", 50, 0, 100);
+    h_jet1->GetXaxis()->SetTitle("p_{T} (GeV/c)");
+    h_jet1->GetYaxis()->SetTitle("Events");
+    TH1F *h_jet2= new TH1F("Jato_eta", "Distribuicao de #eta dos jatos", 50, -3, 3);
+    h_jet2->GetXaxis()->SetTitle("#eta");
+    h_jet2->GetYaxis()->SetTitle("Events");
+    TH1F *h_jet3= new TH1F("Jato_phi", "Distribuicao de #phi dos jatos", 50, -TMath::Pi(), TMath::Pi());
+    h_jet3->GetXaxis()->SetTitle("#phi");
+    h_jet3->GetYaxis()->SetTitle("Events");
+
+    //Criando histograma da massa invariante
+    TH1F *h_mass = new TH1F("Leptons_mass", "Massa Invariante de tau e muon", 50, 0, 200);
+
+    //Preenchendo valores
+    Long64_t nentries = tree->GetEntries();
+    for (Long64_t i = 0; i < nentries; i++) {
+        tree->GetEntry(i);
+        
+        h_pt->Fill(pt1);
+        h_pt->Fill(pt2);
+        h_pt->Fill(pt3);
+        h_jet1->Fill(pt4);
+        h_eta->Fill(eta1);
+        h_eta->Fill(eta2);
+        h_eta->Fill(eta3);
+        h_jet2->Fill(eta4);
+        h_phi->Fill(phi1);
+        h_phi->Fill(phi2);
+        h_phi->Fill(phi3);
+        h_jet3->Fill(phi4);
+
+
+        // Calculando a massa invariante do tau e do muon
+        double M2 = 2 * pt1 * pt2 * 
+                    (TMath::CosH(eta1 - eta2) - TMath::Cos(phi1 - phi2));
+        double M = TMath::Sqrt(M2);
+        h_mass->Fill(M);
+    }
+
+    //Criando canvas e salvando as imagens geradas
+    TCanvas *c1 = new TCanvas("c1", "Distribuicao pt leptons", 800, 600);
+    h_pt->Draw();
+    c1->SaveAs("ptleptons.png");
+
+    TCanvas *c2 = new TCanvas("c2", "Distribuicao #eta leptons", 800, 600);
+    h_eta->Draw();
+    c2->SaveAs("etaleptons.png");
+    
+    TCanvas *c3 = new TCanvas("c3", "Distribuicao #phi leptons", 800, 600);
+    h_phi->Draw();
+    c3->SaveAs("phileptons.png");
+        
+    TCanvas *c4 = new TCanvas("c4", "Distribuicao pt jatos", 800, 600);
+    h_jet1->Draw();
+    c4->SaveAs("ptjatos.png");
+    
+    TCanvas *c5 = new TCanvas("c5", "Distribuicao #eta jatos", 800, 600);
+    h_jet2->Draw();
+    c5->SaveAs("etajatos.png");
+    
+    TCanvas *c6 = new TCanvas("c6", "Distribuicao #phi jatos", 800, 600);
+    h_jet3->Draw();
+    c6->SaveAs("phijatos.png");
+        
+    TCanvas *c7 = new TCanvas("c7", "Massa invariante", 800, 600);
+    h_mass->Draw();
+    c7->SaveAs("massa.png");
+ 
+
+    // Fechando o arquivo
+    file->Close();
+}
